@@ -58,20 +58,7 @@ The objective of this milestone is to develop a secure User Authentication Modul
 
 ---
 
-## Folder Structure
 
-```
-Milestone1/
-│── Authentication.ipynb
-│── README.md
-└── screenshots/
-    ├── home_page.png
-    ├── signup_page.png
-    ├── login_page.png
-    ├── forgot_password_page.png
-    ├── dashboard.png
-    └── neon_database.png
-```
 
 ---
 
