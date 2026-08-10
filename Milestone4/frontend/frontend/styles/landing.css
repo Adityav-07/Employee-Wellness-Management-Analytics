@@ -1,1 +1,509 @@
 
+/* ===========================================================
+   Employee Wellness Management System
+   Premium Landing Page
+   landing.css
+   =========================================================== */
+
+
+/* ==========================================================================
+   assets/css/landing.css
+   Premium pastel-mountain landing page styles for the
+   Employee Wellness Management System.
+   Loaded by components/landing.py via _load_css().
+   ========================================================================== */
+
+/* ==========================================================================
+   assets/css/landing.css
+   Premium pastel-mountain landing page styles for the
+   Employee Wellness Management System.
+   Loaded by components/landing.py via _load_css().
+   ========================================================================== */
+
+/* ==========================================================================
+   assets/css/landing.css
+   Premium pastel-mountain landing page styles for the
+   Employee Wellness Management System.
+   Loaded by components/landing.py via _load_css().
+   ========================================================================== */
+
+/* ==========================================================================
+   assets/css/landing.css
+   Premium pastel-mountain landing page styles for the
+   Employee Wellness Management System.
+   Loaded by components/landing.py via _load_css().
+   ========================================================================== */
+
+/* ==========================================================================
+   assets/css/landing.css
+   Premium pastel-mountain landing page styles for the
+   Employee Wellness Management System.
+   Loaded by components/landing.py via _load_css().
+   ========================================================================== */
+
+/* ==========================================================================
+   assets/css/landing.css
+   Premium pastel-mountain landing page styles for the
+   Employee Wellness Management System.
+   Loaded by components/landing.py via _load_css().
+   ========================================================================== */
+
+/* ==========================================================================
+   assets/css/landing.css
+   Premium pastel-mountain landing page styles for the
+   Employee Wellness Management System.
+   Loaded by components/landing.py via _load_css().
+   ========================================================================== */
+
+/* -------------------------------------------------------------------------
+   Root tokens
+   ------------------------------------------------------------------------- */
+:root {
+  --wellness-primary: #7c6fe8;
+  --wellness-primary-dark: #5b4fc4;
+  --wellness-accent: #a78bfa;
+  --wellness-accent-2: #c4b5fd;
+  --wellness-ink: #241f3d;
+  --wellness-muted: #6b6584;
+
+  --tone-indigo: #6d5ce8;
+  --tone-indigo-bg: rgba(124, 111, 232, 0.14);
+  --tone-green: #2f9e6e;
+  --tone-green-bg: rgba(47, 158, 110, 0.14);
+  --tone-pink: #e0568c;
+  --tone-pink-bg: rgba(224, 86, 140, 0.14);
+
+  --glass-bg: rgba(255, 255, 255, 0.45);
+  --glass-bg-strong: rgba(255, 255, 255, 0.68);
+  --glass-border: rgba(255, 255, 255, 0.7);
+  --glass-shadow: 0 8px 32px rgba(70, 50, 120, 0.15);
+  --radius-lg: 24px;
+  --radius-md: 16px;
+  --radius-pill: 999px;
+}
+
+/* -------------------------------------------------------------------------
+   Global cleanup / Streamlit chrome
+   ------------------------------------------------------------------------- */
+html, body, [class^="css"] {
+  font-family: "Poppins", "Segoe UI", -apple-system, BlinkMacSystemFont,
+    sans-serif;
+}
+
+#MainMenu,
+footer,
+header[data-testid="stHeader"] {
+  background: transparent;
+}
+
+section[data-testid="stSidebar"] {
+  display: none !important;
+  width: 0px !important;
+  min-width: 0px !important;
+  max-width: 0px !important;
+}
+
+button[data-testid="stSidebarCollapsedControl"],
+div[data-testid="stSidebarCollapsedControl"],
+[data-testid="collapsedControl"] {
+  display: none !important;
+}
+
+div[data-testid="stAppViewContainer"] > .main,
+section.main {
+  margin-left: 0 !important;
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
+.block-container {
+  padding-top: 3.5rem !important;
+  padding-bottom: 3rem !important;
+  max-width: 1200px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+/* -------------------------------------------------------------------------
+   Page container
+   ------------------------------------------------------------------------- */
+.landing-page-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  width: 100%;
+  margin: 0 auto;
+  animation: landing-fade-in 0.9s ease-out;
+}
+
+.section-spacer {
+  height: 3rem;
+  width: 100%;
+}
+
+@keyframes landing-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* -------------------------------------------------------------------------
+   Hero section
+   ------------------------------------------------------------------------- */
+.hero-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.9rem;
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 1.5rem 1.5rem 1rem;
+  width: 100%;
+}
+
+.landing-logo-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  margin-bottom: 0.25rem;
+  animation: landing-float 5s ease-in-out infinite;
+}
+
+.landing-logo-img {
+  display: block;
+  height: auto;
+  width: 100%;
+  object-fit: contain;
+  filter: drop-shadow(0 6px 18px rgba(70, 50, 120, 0.18));
+}
+
+.landing-logo-fallback {
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: var(--wellness-ink);
+  letter-spacing: -0.02em;
+}
+
+@keyframes landing-float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-8px); }
+}
+
+.hero-eyebrow {
+  margin: 0.75rem 0 0;
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--wellness-ink);
+  text-shadow: 0 2px 12px rgba(255, 255, 255, 0.6);
+}
+
+.hero-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  margin: 0.15rem 0 0.35rem;
+}
+
+.hero-divider-line {
+  width: 48px;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    var(--wellness-accent) 100%
+  );
+}
+
+.hero-divider-line:last-child {
+  background: linear-gradient(
+    90deg,
+    var(--wellness-accent) 0%,
+    transparent 100%
+  );
+}
+
+.hero-divider-leaf {
+  font-size: 0.9rem;
+  opacity: 0.8;
+}
+
+.hero-title {
+  font-size: clamp(2.6rem, 6vw, 4.4rem);
+  font-weight: 800;
+  color: var(--wellness-ink);
+  line-height: 1.05;
+  margin: 0;
+  letter-spacing: -0.03em;
+  text-shadow: 0 4px 24px rgba(255, 255, 255, 0.5);
+}
+
+.hero-title-accent {
+  background: linear-gradient(
+    100deg,
+    var(--wellness-primary-dark) 0%,
+    var(--wellness-primary) 55%,
+    var(--wellness-accent) 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.hero-tagline {
+  margin: 0.5rem 0 0;
+  font-size: clamp(1.05rem, 1.6vw, 1.3rem);
+  font-weight: 700;
+  color: var(--wellness-primary-dark);
+  text-shadow: 0 2px 12px rgba(255, 255, 255, 0.6);
+}
+
+.hero-subtitle {
+  max-width: 620px;
+  font-size: clamp(1rem, 1.4vw, 1.15rem);
+  color: var(--wellness-ink);
+  line-height: 1.65;
+  margin: 0.6rem auto 0;
+  text-shadow: 0 2px 14px rgba(255, 255, 255, 0.55);
+}
+
+/* -------------------------------------------------------------------------
+   AI Powered badge row
+   ------------------------------------------------------------------------- */
+.ai-badge-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  margin: 0.25rem 0;
+}
+
+.ai-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.55rem 1.15rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--wellness-primary-dark);
+  background: rgba(255, 255, 255, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.95);
+  border-radius: var(--radius-pill);
+  box-shadow: 0 6px 18px rgba(70, 50, 120, 0.12);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  letter-spacing: 0.01em;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.ai-badge-icon {
+  font-size: 0.95rem;
+  line-height: 1;
+}
+
+.ai-badge--indigo { color: var(--tone-indigo); }
+.ai-badge--green { color: var(--tone-green); }
+.ai-badge--pink { color: var(--tone-pink); }
+
+.ai-badge:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(70, 50, 120, 0.14);
+}
+
+/* -------------------------------------------------------------------------
+   Feature cards (glassmorphism)
+   ------------------------------------------------------------------------- */
+.feature-grid {
+  width: 100%;
+  max-width: 980px;
+  margin: 0.5rem auto 0;
+}
+
+.glass-card {
+  height: 100%;
+  min-height: 210px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 0.6rem;
+  padding: 1.8rem 1.4rem;
+  background: rgba(255, 255, 255, 0.88);
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 12px 34px rgba(70, 50, 120, 0.16);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.glass-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 16px 42px rgba(70, 50, 120, 0.24);
+}
+
+.glass-card-icon {
+  font-size: 2.1rem;
+  width: 64px;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.55);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.7);
+}
+
+.glass-card-icon--indigo { background: var(--tone-indigo-bg); }
+.glass-card-icon--green { background: var(--tone-green-bg); }
+.glass-card-icon--pink { background: var(--tone-pink-bg); }
+
+.glass-card-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--wellness-ink);
+}
+
+.glass-card-title--indigo { color: var(--tone-indigo); }
+.glass-card-title--green { color: var(--tone-green); }
+.glass-card-title--pink { color: var(--tone-pink); }
+
+.glass-card-desc {
+  font-size: 0.88rem;
+  color: var(--wellness-muted);
+  line-height: 1.55;
+}
+
+.glass-card-underline {
+  width: 36px;
+  height: 3px;
+  border-radius: var(--radius-pill);
+  margin-top: 0.25rem;
+}
+
+.glass-card-underline--indigo { background: var(--tone-indigo); }
+.glass-card-underline--green { background: var(--tone-green); }
+.glass-card-underline--pink { background: var(--tone-pink); }
+
+/* -------------------------------------------------------------------------
+   Call to action / Get Started button
+   ------------------------------------------------------------------------- */
+.cta-wrapper {
+  width: 100%;
+  margin: 0.5rem 0 1rem;
+  display: flex;
+  justify-content: center;
+}
+
+/* NOTE: separate st.markdown() calls never actually nest around widgets
+   rendered in between them -- each is an isolated block in Streamlit's
+   DOM, so `.cta-wrapper [data-testid="stButton"]` never matches anything.
+   We target Streamlit's button globally instead (safe here since this is
+   the only st.button on the page). */
+div[data-testid="stButton"] {
+  display: flex;
+  justify-content: center;
+}
+
+div[data-testid="stButton"] button,
+div[data-testid="stButton"] button[kind="secondary"],
+div[data-testid="stButton"] button[kind="primary"],
+div[data-testid="baseButton-secondary"],
+div[data-testid="baseButton-primary"],
+div[data-testid="stBaseButton-secondary"],
+div[data-testid="stBaseButton-primary"] {
+  width: auto !important;
+  min-width: 240px !important;
+  padding: 1rem 2.6rem !important;
+  font-size: 1.15rem !important;
+  font-weight: 700 !important;
+  color: #ffffff !important;
+  background: linear-gradient(
+    100deg,
+    var(--wellness-primary-dark) 0%,
+    var(--wellness-primary) 100%
+  ) !important;
+  border: none !important;
+  border-radius: var(--radius-pill) !important;
+  box-shadow: 0 12px 32px rgba(91, 79, 196, 0.45) !important;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, filter 0.25s ease !important;
+}
+
+div[data-testid="stButton"] button p,
+div[data-testid="stButton"] button div,
+div[data-testid="stButton"] button span {
+  color: #ffffff !important;
+  font-size: 1.15rem !important;
+  font-weight: 700 !important;
+  margin: 0 !important;
+}
+
+div[data-testid="stButton"] button:hover {
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 16px 40px rgba(91, 79, 196, 0.55) !important;
+  filter: brightness(1.06);
+}
+
+div[data-testid="stButton"] button:active {
+  transform: translateY(0px) scale(0.99);
+}
+
+div[data-testid="stButton"] button:focus {
+  outline: none !important;
+  box-shadow: 0 0 0 4px rgba(124, 111, 232, 0.35) !important;
+}
+
+/* -------------------------------------------------------------------------
+   Footer
+   ------------------------------------------------------------------------- */
+.landing-footer {
+  margin-top: 2.5rem;
+  padding-top: 0.5rem;
+  display: flex;
+  justify-content: center;
+}
+
+.privacy-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.65rem 1.4rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--wellness-primary-dark);
+  background: var(--glass-bg-strong);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-pill);
+  box-shadow: var(--glass-shadow);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+/* -------------------------------------------------------------------------
+   Responsive tweaks
+   ------------------------------------------------------------------------- */
+@media (max-width: 768px) {
+  .landing-logo-wrapper {
+    width: 96px;
+    height: 96px;
+  }
+
+  .hero-container {
+    padding: 1.5rem 1rem 1rem;
+  }
+
+  .glass-card {
+    min-height: 180px;
+    padding: 1.4rem 1.1rem;
+  }
+}
