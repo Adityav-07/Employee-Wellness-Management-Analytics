@@ -1,1 +1,628 @@
+/* ==========================================================================
+   styles/auth.css
+   Premium pastel-mountain auth screen styles for MoodMentor.
+   Loaded by components/auth.py via _load_css(). Only applies while the
+   auth screen is being rendered (page == "welcome" and show_auth_panel).
 
+   NOTE ON NESTING: st.markdown('<div>') ... st.markdown('</div>') does
+   NOT actually wrap Streamlit widgets rendered in between -- each
+   st.markdown() call is its own isolated element. We rely on
+   st.container(border=True) for real glass-card wrapping instead, and
+   use a small marker div as the first child of each container so CSS
+   can tell the two apart via :has().
+   ========================================================================== */
+
+:root {
+  --auth-primary: #7c6fe8;
+  --auth-primary-dark: #5b4fc4;
+  --auth-accent: #a78bfa;
+  --auth-ink: #241f3d;
+  --auth-muted: #6b6584;
+  --auth-glass: rgba(255, 255, 255, 0.86);
+  --auth-glass-strong: rgba(255, 255, 255, 0.94);
+  --auth-border: rgba(255, 255, 255, 0.95);
+  --auth-radius: 28px;
+  --auth-shadow: 0 24px 64px rgba(70, 50, 120, 0.22);
+}
+
+/* -------------------------------------------------------------------------
+   Page chrome
+   ------------------------------------------------------------------------- */
+.block-container {
+  padding-top: 5.5rem !important;
+  padding-bottom: 3rem !important;
+  max-width: 1240px !important;
+}
+
+/* -------------------------------------------------------------------------
+   Top header: logo + title + subtitle
+   ------------------------------------------------------------------------- */
+.auth-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 0.4rem;
+  padding: 0 1rem 1.75rem;
+  animation: auth-panel-in 0.5s ease-out both;
+}
+
+.auth-header-logo {
+  margin-bottom: 0.4rem;
+}
+
+.auth-header-logo-img {
+  display: block;
+  height: auto;
+  filter: drop-shadow(0 6px 18px rgba(70, 50, 120, 0.18));
+}
+
+.auth-header-logo-fallback {
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: var(--auth-ink);
+}
+
+.auth-header-title {
+  font-size: clamp(1.6rem, 3vw, 2.4rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  margin: 0;
+  background: linear-gradient(
+    100deg,
+    var(--auth-primary-dark) 0%,
+    var(--auth-primary) 55%,
+    var(--auth-accent) 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.auth-header-subtitle {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--auth-muted);
+  margin: 0.15rem 0 0;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.auth-header-subtitle span {
+  color: var(--auth-accent);
+  font-size: 0.9rem;
+}
+
+/* -------------------------------------------------------------------------
+   Floating decorative stat cards
+   ------------------------------------------------------------------------- */
+.auth-float-card {
+  position: fixed;
+  top: 90px;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.9rem 1.1rem;
+  background: var(--auth-glass);
+  border: 1px solid var(--auth-border);
+  border-radius: 18px;
+  box-shadow: var(--auth-shadow);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: 5;
+  animation: auth-float 5s ease-in-out infinite;
+  max-width: 190px;
+}
+
+.auth-float-card--left { left: 2vw; }
+.auth-float-card--right { right: 2vw; animation-delay: 1.2s; }
+.auth-float-card--bottom-right {
+  top: auto;
+  bottom: 12vh;
+  right: 1vw;
+  animation-delay: 2.1s;
+}
+
+@keyframes auth-float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+.auth-float-icon {
+  width: 40px;
+  height: 40px;
+  min-width: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3rem;
+  border-radius: 12px;
+  background: rgba(124, 111, 232, 0.14);
+}
+
+.auth-float-label {
+  font-size: 0.72rem;
+  color: var(--auth-muted);
+  font-weight: 600;
+}
+
+.auth-float-value {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: var(--auth-ink);
+  line-height: 1.2;
+}
+
+.auth-float-tag {
+  font-size: 0.72rem;
+  color: #2f9e6e;
+  font-weight: 600;
+}
+
+@media (max-width: 1100px) {
+  .auth-float-card { display: none; }
+}
+
+/* -------------------------------------------------------------------------
+   Glass card panels (left = feature panel, right = auth form panel)
+   Targeted via :has() on the marker div injected as first child, since
+   Streamlit's container(border=True) wrapper doesn't accept custom
+   classes directly.
+   ------------------------------------------------------------------------- */
+[data-testid="stVerticalBlockBorderWrapper"]:has(.auth-left-marker),
+[data-testid="stVerticalBlockBorderWrapper"]:has(.auth-right-marker) {
+  background: var(--auth-glass) !important;
+  border: 1px solid var(--auth-border) !important;
+  border-radius: var(--auth-radius) !important;
+  box-shadow: var(--auth-shadow), inset 0 1px 0 rgba(255, 255, 255, 0.6) !important;
+  backdrop-filter: blur(14px) !important;
+  -webkit-backdrop-filter: blur(14px) !important;
+  padding: 0.5rem !important;
+  animation: auth-panel-in 0.6s ease-out both;
+  transition: transform 0.35s ease, box-shadow 0.35s ease !important;
+}
+
+[data-testid="stVerticalBlockBorderWrapper"]:has(.auth-right-marker) {
+  background: var(--auth-glass-strong) !important;
+  animation-delay: 0.1s;
+}
+
+[data-testid="stVerticalBlockBorderWrapper"]:has(.auth-left-marker):hover,
+[data-testid="stVerticalBlockBorderWrapper"]:has(.auth-right-marker):hover {
+  transform: translateY(-4px) !important;
+  box-shadow: 0 28px 72px rgba(70, 50, 120, 0.26), inset 0 1px 0 rgba(255, 255, 255, 0.7) !important;
+}
+
+@keyframes auth-panel-in {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* -------------------------------------------------------------------------
+   Left panel: feature / marketing content
+   ------------------------------------------------------------------------- */
+.auth-left-content {
+  padding: 1.5rem 1.75rem 2rem;
+}
+
+.auth-left-badge {
+  display: inline-block;
+  padding: 0.4rem 1rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--auth-primary-dark);
+  background: rgba(124, 111, 232, 0.12);
+  border: 1px solid rgba(124, 111, 232, 0.18);
+  border-radius: 999px;
+  letter-spacing: 0.03em;
+  margin-bottom: 1.1rem;
+}
+
+.auth-left-title {
+  font-size: clamp(1.7rem, 2.5vw, 2.2rem);
+  font-weight: 800;
+  color: var(--auth-ink);
+  line-height: 1.22;
+  margin: 0 0 0.85rem;
+  letter-spacing: -0.02em;
+}
+
+.auth-left-desc {
+  font-size: 0.96rem;
+  color: var(--auth-muted);
+  line-height: 1.65;
+  margin: 0 0 1.75rem;
+}
+
+.auth-feature-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.auth-feature-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.85rem;
+  padding: 0.35rem 0.35rem 0.9rem;
+  border-bottom: 1px solid rgba(124, 111, 232, 0.12);
+  border-radius: 12px;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.auth-feature-item:hover {
+  background: rgba(124, 111, 232, 0.06);
+  transform: translateX(3px);
+}
+
+.auth-feature-item:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.auth-feature-icon {
+  width: 42px;
+  height: 42px;
+  min-width: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  border-radius: 13px;
+  background: rgba(124, 111, 232, 0.14);
+  box-shadow: inset 0 0 0 1px rgba(124, 111, 232, 0.1);
+}
+
+.auth-feature-title {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--auth-ink);
+}
+
+.auth-feature-desc {
+  font-size: 0.82rem;
+  color: var(--auth-muted);
+  line-height: 1.45;
+}
+
+/* -------------------------------------------------------------------------
+   Right panel: auth form content
+   ------------------------------------------------------------------------- */
+[data-testid="stVerticalBlockBorderWrapper"]:has(.auth-right-marker) {
+  padding: 1.5rem 1.75rem 2rem !important;
+}
+
+.auth-heading {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--auth-ink);
+  margin-bottom: 0.25rem;
+}
+
+.auth-subtitle {
+  font-size: 0.9rem;
+  color: var(--auth-muted);
+  margin-bottom: 1.25rem;
+}
+
+.auth-divider {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  color: var(--auth-muted);
+  font-size: 0.8rem;
+  font-weight: 600;
+  margin: 1rem 0;
+}
+
+.auth-divider::before,
+.auth-divider::after {
+  content: "";
+  flex: 1;
+  border-bottom: 1px solid rgba(124, 111, 232, 0.18);
+}
+
+.auth-divider span {
+  padding: 0 0.75rem;
+}
+
+/* -------------------------------------------------------------------------
+   Inputs
+   ------------------------------------------------------------------------- */
+[data-testid="stVerticalBlockBorderWrapper"]:has(.auth-right-marker) label p {
+  font-weight: 600 !important;
+  color: var(--auth-ink) !important;
+  font-size: 0.85rem !important;
+}
+
+[data-testid="stVerticalBlockBorderWrapper"]:has(.auth-right-marker) input {
+  border-radius: 12px !important;
+  border: 1px solid rgba(124, 111, 232, 0.25) !important;
+  background: rgba(255, 255, 255, 0.9) !important;
+  padding: 0.65rem 0.9rem !important;
+  font-size: 0.95rem !important;
+  box-shadow: none !important;
+}
+
+[data-testid="stVerticalBlockBorderWrapper"]:has(.auth-right-marker) input:focus {
+  border-color: var(--auth-primary) !important;
+  box-shadow: 0 0 0 3px rgba(124, 111, 232, 0.18) !important;
+}
+
+/* -------------------------------------------------------------------------
+   Buttons
+   Primary (form submit) = solid gradient pill CTA.
+   Secondary (plain st.button, e.g. "Sign up" / "Forgot password?" /
+   "Back to login") = ghost/outline style so they read as lower-emphasis.
+   Both targeted globally (not through the broken markdown-wrapper
+   pattern) with !important, matching the fix used on the landing page.
+   ------------------------------------------------------------------------- */
+div[data-testid="stFormSubmitButton"] button,
+div[data-testid="stFormSubmitButton"] button[kind="primary"] {
+  width: 100% !important;
+  padding: 0.9rem 1.5rem !important;
+  font-size: 1.02rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.01em !important;
+  color: #ffffff !important;
+  background: linear-gradient(
+    100deg,
+    var(--auth-primary-dark) 0%,
+    var(--auth-primary) 55%,
+    var(--auth-accent) 100%
+  ) !important;
+  border: none !important;
+  border-radius: 999px !important;
+  box-shadow: 0 14px 34px rgba(91, 79, 196, 0.45) !important;
+  transition: transform 0.22s ease, box-shadow 0.22s ease, filter 0.22s ease !important;
+}
+
+div[data-testid="stFormSubmitButton"] button p {
+  color: #ffffff !important;
+  font-weight: 700 !important;
+}
+
+div[data-testid="stFormSubmitButton"] button:hover {
+  transform: translateY(-3px) scale(1.01);
+  box-shadow: 0 18px 42px rgba(91, 79, 196, 0.55) !important;
+  filter: brightness(1.06);
+}
+
+[data-testid="stVerticalBlockBorderWrapper"]:has(.auth-right-marker) div[data-testid="stButton"] button,
+div[data-testid="stButton"] button {
+  width: 100% !important;
+  background: transparent !important;
+  color: var(--auth-primary-dark) !important;
+  border: none !important;
+  border-radius: 10px !important;
+  font-weight: 700 !important;
+  font-size: 0.92rem !important;
+  box-shadow: none !important;
+  padding: 0.5rem 0.5rem !important;
+  transition: color 0.2s ease, background 0.2s ease !important;
+}
+
+[data-testid="stVerticalBlockBorderWrapper"]:has(.auth-right-marker) div[data-testid="stButton"] button p,
+div[data-testid="stButton"] button p {
+  color: var(--auth-primary-dark) !important;
+  font-weight: 700 !important;
+  margin: 0 !important;
+}
+
+[data-testid="stVerticalBlockBorderWrapper"]:has(.auth-right-marker) div[data-testid="stButton"] button:hover,
+div[data-testid="stButton"] button:hover {
+  background: rgba(124, 111, 232, 0.1) !important;
+  color: var(--auth-primary) !important;
+  transform: none !important;
+}
+
+/* -------------------------------------------------------------------------
+   Radio (signup role picker)
+   ------------------------------------------------------------------------- */
+[data-testid="stVerticalBlockBorderWrapper"]:has(.auth-right-marker) [data-testid="stRadio"] label p {
+  font-size: 0.85rem !important;
+}
+
+/* -------------------------------------------------------------------------
+   Mockup preview panel (decorative only -- donut, trend chart, chat bubble)
+   ------------------------------------------------------------------------- */
+.auth-mockup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+  padding: 1.5rem 1.25rem 1.5rem 0;
+  position: relative;
+}
+
+.auth-mockup-card {
+  background: rgba(255, 255, 255, 0.85);
+  border: 1px solid rgba(124, 111, 232, 0.14);
+  border-radius: 16px;
+  padding: 0.9rem 1rem;
+  box-shadow: 0 8px 24px rgba(70, 50, 120, 0.1);
+}
+
+.auth-mockup-title {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--auth-muted);
+  margin-bottom: 0.5rem;
+}
+
+.auth-mockup-donut-row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.auth-mockup-donut {
+  width: 58px;
+  height: 58px;
+  min-width: 58px;
+  border-radius: 50%;
+  background: conic-gradient(
+    var(--auth-primary) 0deg 302deg,
+    rgba(124, 111, 232, 0.15) 302deg 360deg
+  );
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.auth-mockup-donut-inner {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: #ffffff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.auth-mockup-donut-value {
+  font-size: 0.8rem;
+  font-weight: 800;
+  color: var(--auth-ink);
+  line-height: 1;
+}
+
+.auth-mockup-donut-label {
+  font-size: 0.5rem;
+  color: var(--auth-muted);
+  font-weight: 600;
+}
+
+.auth-mockup-spark {
+  flex: 1;
+  height: 40px;
+}
+
+.auth-mockup-spark--wide {
+  width: 100%;
+  height: 56px;
+}
+
+.auth-mockup-axis {
+  font-size: 0.6rem;
+  color: var(--auth-muted);
+  display: flex;
+  justify-content: space-between;
+  margin-top: 0.35rem;
+}
+
+.auth-mockup-chat {
+  display: flex;
+  align-items: flex-end;
+  gap: 0.5rem;
+  align-self: flex-end;
+}
+
+.auth-mockup-bubble {
+  background: rgba(255, 255, 255, 0.92);
+  border: 1px solid rgba(124, 111, 232, 0.16);
+  border-radius: 14px 14px 4px 14px;
+  padding: 0.6rem 0.8rem;
+  font-size: 0.72rem;
+  color: var(--auth-ink);
+  line-height: 1.4;
+  box-shadow: 0 8px 20px rgba(70, 50, 120, 0.1);
+  max-width: 150px;
+}
+
+.auth-mockup-avatar {
+  width: 42px;
+  height: 42px;
+  min-width: 42px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--auth-primary) 0%, var(--auth-accent) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  box-shadow: 0 8px 20px rgba(91, 79, 196, 0.3);
+}
+
+@media (max-width: 900px) {
+  .auth-mockup { display: none; }
+}
+
+/* -------------------------------------------------------------------------
+   Forgot password / Create account links
+   ------------------------------------------------------------------------- */
+.auth-forgot-link div[data-testid="stButton"] button {
+  text-align: right !important;
+  justify-content: flex-end !important;
+}
+
+.auth-create-account div[data-testid="stButton"] button {
+  font-size: 0.85rem !important;
+  font-weight: 500 !important;
+  color: var(--auth-muted) !important;
+}
+
+.auth-create-account div[data-testid="stButton"] button p {
+  color: var(--auth-muted) !important;
+  font-weight: 500 !important;
+}
+
+/* -------------------------------------------------------------------------
+   Footer trust bar
+   ------------------------------------------------------------------------- */
+.auth-footer-bar {
+  width: 100%;
+  margin-top: 1.5rem;
+  padding: 0.85rem 1.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  background: rgba(255, 255, 255, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  border-radius: 999px;
+  box-shadow: 0 8px 24px rgba(70, 50, 120, 0.1);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  font-size: 0.8rem;
+  color: var(--auth-muted);
+  font-weight: 500;
+}
+
+.auth-footer-sep {
+  color: rgba(107, 101, 132, 0.35);
+}
+
+.auth-footer-highlight {
+  color: var(--auth-primary-dark);
+  font-weight: 700;
+}
+
+@media (max-width: 900px) {
+  .auth-footer-bar {
+    flex-direction: column;
+    border-radius: 20px;
+    text-align: center;
+  }
+  .auth-footer-sep { display: none; }
+}
+
+/* -------------------------------------------------------------------------
+   Responsive
+   ------------------------------------------------------------------------- */
+@media (max-width: 900px) {
+  .auth-left-content,
+  [data-testid="stVerticalBlockBorderWrapper"]:has(.auth-right-marker) {
+    padding: 1.25rem !important;
+  }
+  .block-container {
+    padding-top: 2rem !important;
+  }
+}
